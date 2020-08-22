@@ -30,14 +30,20 @@
           { "char": "}", "alternatives": ["&#125;"] }
         ]
       }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "controlComponents": ["Field"],
+        "depth": 3
+      }
     ]
   },
   "overrides": [
     {
       "files": "**/*.svg.*.tsx",
       "rules": {
-        "max-len": "off",
-        "react/jsx-props-no-spreading": "off"
+        "max-len": "off"
       }
     }
   ]
