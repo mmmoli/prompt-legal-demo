@@ -1,6 +1,10 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
+import 'tailwindcss/dist/base.css';
+import 'tailwindcss/dist/components.css';
+import 'tailwindcss/dist/utilities.css';
+
 global.__BASE_PATH__ = '';
 
 // Gatsby's Link overrides:
