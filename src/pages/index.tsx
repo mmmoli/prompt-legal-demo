@@ -6,9 +6,17 @@ const Container = tw.div`
   p-12
 `;
 
+const handler = (values: any) => {
+  if (window !== undefined) {
+    window.alert(JSON.stringify(values, undefined, 2))
+    return;
+  }
+  console.log(values)
+}
+
 const IndexPage: React.FC = () => (
   <Container>
-    <NewCompanyRegistrationForm submitHandler={window.alert} />
+    <NewCompanyRegistrationForm submitHandler={handler} />
   </Container>
 );
 
