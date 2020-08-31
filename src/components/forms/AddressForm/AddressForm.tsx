@@ -23,16 +23,24 @@ export type Address = {
   province: string;
 };
 
-const Heading = tw.h2`
+const Header = tw.div`
+  flex
+  items-center
+  justify-between
+  bg-red-400
+`;
+
+const Heading = tw.h3`
   block
   text-lg
 `;
 
 const Container = tw.div`
-  my-4
+  gap-2
   grid
   grid-cols-1
-  gap-2
+  max-w-xs
+  my-4
 `;
 
 type AddressFormProps = {
@@ -42,10 +50,12 @@ type AddressFormProps = {
 export const AddressForm: React.FC<AddressFormProps> = ({ index, onCancel }) => {
   return (
     <Container>
-      <Heading>Premises #{index + 1}</Heading>
-      <Button type="button" buttonVariant="text" onClick={() => onCancel()}>
-        <FiTrash2 />
-      </Button>
+      <Header>
+        <Heading>Premises #{index + 1}</Heading>
+        <Button type="button" buttonVariant="text" onClick={() => onCancel()}>
+          <FiTrash2 /> Delete
+        </Button>
+      </Header>
       <Label>
         House Registration No.
         <Field as={StyledInput} name={`premises.${index}.address.houseRegistrationNo`} />

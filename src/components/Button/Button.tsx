@@ -32,7 +32,10 @@ const Button = styled.button<ButtonProps>`
         ];
 
       case 'text':
-        return [tw`text-primary`, !disabled && tw`hover:underline active:(text-primary-light)`];
+        return [
+          tw`text-primary flex items-center`,
+          !disabled && tw`hover:underline active:(text-primary-light)`
+        ];
       default:
         return null;
     }

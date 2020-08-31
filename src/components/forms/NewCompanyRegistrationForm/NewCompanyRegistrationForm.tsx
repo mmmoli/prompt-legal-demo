@@ -1,9 +1,10 @@
 import React from 'react';
 import { Formik, Field, FormikHelpers, FieldArray } from 'formik';
+import tw from 'twin.macro';
 import { AddressForm, Address } from '../AddressForm';
 import { Label, RadioLabel, StyledForm, StyledInput, StyledRadios } from '../../elements';
 import { Button } from '../../Button';
-import tw from 'twin.macro';
+import { Fieldset } from '../Fieldset';
 
 enum OfficeType {
   HEAD = 'head',
@@ -46,58 +47,62 @@ const NewCompanyRegistrationForm: React.FC<NewCompanyRegistrationFormProps> = ({
     >
       {({ values, isValid }) => (
         <StyledForm>
-          <Label>
-            Company Name (Thai)
-            <Field
-              as={StyledInput}
-              required
-              name="part1CompanyNameTH"
-              placeholder={`i.e. "ACME Inc."`}
-            />
-          </Label>
+          <Fieldset heading="1. Company Details">
+            <Label>
+              Company Name (Thai)
+              <Field
+                as={StyledInput}
+                required
+                name="part1CompanyNameTH"
+                placeholder={`i.e. "ACME Inc."`}
+              />
+            </Label>
 
-          <Label>
-            Company Name (English)
-            <Field as={StyledInput} name="part1CompanyNameEN" placeholder={`i.e. "ACME Inc."`} />
-          </Label>
+            <Label>
+              Company Name (English)
+              <Field as={StyledInput} name="part1CompanyNameEN" placeholder={`i.e. "ACME Inc."`} />
+            </Label>
+          </Fieldset>
 
-          <FieldArray name="premises">
-            {({ remove, push }) => (
-              <div>
-                {values.premises.map((_, index) => (
-                  <div>
-                    <div tw="flex flex-col items-stretch">
-                      <RadioLabel>
-                        <Field
-                          as={StyledRadios}
-                          type="radio"
-                          checked
-                          name={`premises.${index}.officeType`}
-                          value="head"
-                        />
-                        Head Office
-                      </RadioLabel>
+          <Fieldset heading="2. Premises">
+            <FieldArray name="premises">
+              {({ remove, push }) => (
+                <div>
+                  {values.premises.map((_, index) => (
+                    <div>
+                      <div tw="flex flex-col items-stretch">
+                        <RadioLabel>
+                          <Field
+                            as={StyledRadios}
+                            type="radio"
+                            checked
+                            name={`premises.${index}.officeType`}
+                            value="head"
+                          />
+                          Head Office
+                        </RadioLabel>
 
-                      <RadioLabel>
-                        <Field
-                          as={StyledRadios}
-                          type="radio"
-                          name={`premises.${index}.officeType`}
-                          value="branch"
-                        />
-                        Branch
-                      </RadioLabel>
+                        <RadioLabel>
+                          <Field
+                            as={StyledRadios}
+                            type="radio"
+                            name={`premises.${index}.officeType`}
+                            value="branch"
+                          />
+                          Branch
+                        </RadioLabel>
+                      </div>
+
+                      <AddressForm index={index} onCancel={() => remove(index)} />
                     </div>
-
-                    <AddressForm index={index} onCancel={() => remove(index)} />
-                  </div>
-                ))}
-                <Button type="button" buttonVariant="text" onClick={() => push({})}>
-                  Add Premises
-                </Button>
-              </div>
-            )}
-          </FieldArray>
+                  ))}
+                  <Button type="button" buttonVariant="outlined" onClick={() => push({})}>
+                    Add Premises
+                  </Button>
+                </div>
+              )}
+            </FieldArray>
+          </Fieldset>
 
           <Button buttonVariant="primary" disabled={!isValid} type="submit">
             Submit
